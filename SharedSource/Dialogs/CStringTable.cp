@@ -79,6 +79,8 @@ CStringTable::ReplaceStrings(const TableCellT& inCell, const StringList& strings
 	Rect frame;
 	if (FetchLocalCellFrame(inCell, frame)) {
 		FocusDraw();
+		LocalToPortPoint(topLeft(frame));
+		LocalToPortPoint(botRight(frame));
 		InvalPortRect(&frame);
 	}
 }

@@ -310,6 +310,8 @@ CTaskEdit::RefreshRow(const TableCellT &inCell)
 	Rect frame;
 	for (localCell.col = 2; localCell.col <= colCount; localCell.col += 1) {
 		if (FetchLocalCellFrame(localCell, frame)) {
+			LocalToPortPoint(topLeft(frame));
+			LocalToPortPoint(botRight(frame));
 			FocusDraw();
 			InvalPortRect(&frame);
 		}
