@@ -1,17 +1,16 @@
-#if __POWERPC__
-	#pragma precompile_target "FMConduitHeadersPPC"
-	
-#elif __CFM68K__
-	#pragma precompile_target "FMConduitHeadersCFM68K"
-	
-#else
-	#pragma precompile_target "FMConduitHeaders68K"
-#endif
+#pragma precompile_target "FMConduitHeadersCarbon"
 
 #pragma once on
-#define HEAP_MANAGER 1
+#define PP_Target_Carbon		1
+
+#define PP_Target_Classic		(!PP_Target_Carbon)
+
+#define TARGET_API_MAC_CARBON	PP_Target_Carbon
+#define TARGET_API_MAC_OS8		PP_Target_Classic
+
 #define CONDUIT 1
-#include <PP_ClassHeaders.cp>
+#define SELF_TESTS 0
+#include <PP_DebugHeaders.cp>
 #include <fp.h>
 #include <vector>
 #include <map>
@@ -19,4 +18,6 @@
 #include <algorithm>
 #include <functional>
 using namespace std;
+//#define PALMBOOL BOOL
 #include "GladPortDefs.h"
+#include "SyncMgr.h"
