@@ -8,7 +8,7 @@
 #endif
 
 #ifdef _DEBUGOUTPUT
-#define	kDefaultDebugFileName	"\pMac OS X:UDebugOut.default"
+#define	kDefaultDebugFileName	"\pUDebugOut.default"
 #define	kDebugFileCreator		'CWIE'
 #define	kDebugFileType			'TEXT'
 

@@ -120,7 +120,11 @@ void UDebugOutPriv::CloseOutFile()
 void UDebugOutPriv::CreateAndOpenLocalOutFile( ConstStr255Param outFileName )
 {
 	this->CloseOutFile();
-	OSErr err = ::FSMakeFSSpec( 0, 2, outFileName, &outFile );
+	
+	short vRefNum;
+	long parID;
+	ThrowIfOSErr_(FindFolder(kOnAppropriateDisk, kCurrentUserFolderType, false, &vRefNum, &parID));
+	OSErr err = ::FSMakeFSSpec( vRefNum, parID, outFileName, &outFile );
 	switch( err )
 	{
 		case noErr:
