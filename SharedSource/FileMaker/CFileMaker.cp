@@ -458,26 +458,6 @@ void CFileMaker::SetQuitMode(int quitMode)
 }
 
 
-bool
-CFileMaker::AskForFileMakerDatabase(FSSpec& outSpec, OSType& outType)
-{
-	PP_StandardDialogs::LFileChooser	chooser;
-			
-	NavDialogOptions*	options = chooser.GetDialogOptions();
-	if (options != nil) {
-		options->dialogOptionFlags =	kNavDefaultNavDlogOptions
-										+ kNavSelectAllReadableItem;
-	}
-
-	LFileTypeList fTypeList(kNumTypes, (OSType*)gTypes);
-	if (chooser.AskOpenFile(fTypeList)) {
-		chooser.GetFileSpec(1, outSpec);
-		outType = Folders::GetFileType(outSpec);
-		return true;
-	}
-	return false;
-}
-
 static bool
 MyAskChooseOneFile(
 	const LFileTypeList&	inFileTypes,
@@ -506,7 +486,7 @@ MyAskChooseOneFile(
 	OSErr err = ::NavChooseFile(
 						defaultLocationDesc,
 						mNavReply,
-						&mNavOptions,
+						0,
 						0,
 						0,
 						0,
@@ -523,6 +503,20 @@ MyAskChooseOneFile(
 	}
 
 	return mNavReply.IsValid();
+}
+
+bool
+CFileMaker::AskForFileMakerDatabase(FSSpec& outSpec, OSType& outType)
+{
+	vector<OSType> typesPlus;
+	copy(gTypes, kNumTypes+gTypes, back_inserter(typesPlus));
+			
+	LFileTypeList fTypeList(typesPlus.size(), (OSType*)&typesPlus[0]);
+	if (MyAskChooseOneFile(fTypeList, outSpec)) {
+		outType = Folders::GetFileType(outSpec);
+		return true;
+	}
+	return false;
 }
 
 bool

@@ -102,7 +102,7 @@ Boolean CSyncRecord::RecordDataEqualTo(const CSyncRecord& inCompareRec, const Ig
 			continue;
 		#endif
 		FieldMap::const_iterator f = inCompareRec.fFields.find(i->first);
-		if (i->second != f->second)
+		if (f == inCompareRec.fFields.end() || i->second != f->second)
 			return false;
 	}
 	
