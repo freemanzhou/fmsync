@@ -93,6 +93,7 @@ resource 'STR#' (kConverterErrorStrings, purgeable)
 	"the specified database is in the trash.";		
 	"a copy the appropriate version of FileMaker cannot be found on your disk.";		
 	"Used the name Ò%%2Ó for the JFile database, since the desired name Ò%%1Ó was already in use for a Palm database.";		
+	"FMSync cannot be configured from Palm Desktop. Please run HotSync Manager from the Finder to configure FMSync. You'll have to ask Palm why this is necessary.";		
 }
 };
 

@@ -2,6 +2,7 @@
 #include <LPushButton.h>
 #include <LCheckBox.h>
 #include <LTextGroupBox.h>
+#include <UNavServicesDialogs.h>
 
 #include "CUploadDBDialog.h"
 #include "CSelectRemoteDatabase.h"
@@ -148,8 +149,12 @@ CUploadDBDialog::ListenToMessage(MessageT inMessage, void* param)
 	} else if (inMessage == 'Remo') {
 		DoRemove();
 	} else if (inMessage == 'SetL') {
-		if (fIndex != -1)
+		if (fIndex != -1) {
 			DoSetLocation(fReqs[fIndex]);
+			int index;
+			bool hasSelection = SelectedIndex(index);
+			UpdateControlForSelection(index, hasSelection);
+		}
 	} else if (inMessage == 'Chan') {
 		DoSetChanges();
 	} else if (inMessage == CStringTable::kSelectionChanged) {
@@ -175,19 +180,30 @@ CUploadDBDialog::DoRemove()
 bool
 CUploadDBDialog::DoSetLocation(CUploadRequest& thisOne)
 {
-	return false;
-#if 0
-	StandardFileReply reply;
-	FSSpec location;
+	FSSpec location = {};
 	if (!thisOne.GetLocation(location) && location.name[0] == 0) {
 		string localName(MakeLocalName(thisOne.fName));
 		LString::CopyPStr(AsStr255(localName), location.name);
 	}
-	StandardPutFile(0, location.name, &reply);
-	if (reply.sfGood)
-		thisOne.SetLocation(reply.sfFile);
-	return reply.sfGood;
-#endif
+	UNavServicesDialogs::StNavReplyRecord reply;
+	NavDialogOptions options;
+	::NavGetDefaultDialogOptions(&options);
+	OSErr err = ::NavPutFile(
+						0,
+						reply,
+						&options,
+						0,
+						'TEXT',
+						0,
+						0L);
+	
+	if (reply.IsValid()) {
+		FSSpec endLocation;
+		reply.GetFileSpec(endLocation);
+		thisOne.SetLocation(endLocation);
+	}
+
+	return reply.IsValid();
 }
 
 const string kLocalNameExtension = ".txt";

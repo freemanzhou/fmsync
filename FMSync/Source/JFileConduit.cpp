@@ -321,6 +321,13 @@ void CJFileConduit::CheckCanRun()
 	if (!UEnvironment::HasGestaltAttribute(gestaltAppleScriptAttr, gestaltAppleScriptPresent)) {
 		Throw_(kNeedsAppleScript);
 	}
+	
+	unsigned long stackFreeSpace;
+	ThreadCurrentStackSpace(kCurrentThreadID, &stackFreeSpace);
+	if (stackFreeSpace < 10024) {
+		Throw_(kRunInHotSyncMangerCode);
+	}
+	
 }
 
 long CJFileConduit::OpenConduit(PROGRESSFN inProgressCallBack, CSyncProperties& inSyncProperties)

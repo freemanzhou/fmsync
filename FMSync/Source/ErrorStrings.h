@@ -84,5 +84,6 @@
 #define		kDatabaseInTrashIndex		31
 #define		kCannotFindFileMakerIndex	32
 #define		kNameInUsendex				33
+#define		kUseHotSyncManagerIndex		34
 
 #define		kTaskDescriptionStrings		8202

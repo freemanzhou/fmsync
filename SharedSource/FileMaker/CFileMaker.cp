@@ -153,7 +153,7 @@ CFileMaker::Initialize(const FSSpec& sourceFile)
 			FSRef appRef;
 			ThrowIfOSErr_(FSpMakeFSRef(&sourceFile, &ref));
 			OSStatus err = LSOpenFSRef(&ref, &appRef);
-			FileMakerIsRunning();
+			ThrowIfNot_(WaitUntilFileMakerIsRunning());
 			HandleLaunchWithDocumentFailed(err, sourceFile);
 			launched = true;
 			StBringToFront btf(fFilemakerPSN);
@@ -408,6 +408,16 @@ bool CFileMaker::CreatorIsFileMaker(OSType creator)
 			return true;
 	}
 	return false;
+}
+
+bool CFileMaker::WaitUntilFileMakerIsRunning()
+{
+	UInt32 endTicks = TickCount() + 1200;
+	bool isFound = false;
+	do {
+		isFound = FileMakerIsRunning();
+	} while (!isFound && TickCount() < endTicks);
+	return isFound;
 }
 
 bool CFileMaker::FileMakerIsRunning()

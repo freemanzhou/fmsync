@@ -65,8 +65,8 @@ DescribeFile(const FSSpec& thisFile, bool willBeFolder)
 	} else {
 		long foundDirID;
 		short foundVRefNum;
-		ThrowIfOSErr_(FindFolder(vRefNum, kDesktopFolderType, false, &foundVRefNum, &foundDirID));
-		if (foundDirID == dirID) {
+		ThrowIfOSErr_(FindFolder(kOnAppropriateDisk, kDesktopFolderType, false, &foundVRefNum, &foundDirID));
+		if (foundDirID == dirID && foundVRefNum == vRefNum) {
 			folderIs = LoadString(kFileStrings, kDesktopFolderIndex);
 			Substitute(folderIs, "%%3", AsString(volName));
 		} else {

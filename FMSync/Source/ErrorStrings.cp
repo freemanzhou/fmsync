@@ -17,6 +17,9 @@ ConvertErrorToString(ExceptionCode errorCode)
 	case kDatabaseInTrashError:
 		return LoadString(kConverterErrorStrings, kDatabaseInTrashIndex);
 		break;
+	case kRunInHotSyncMangerCode:
+		return LoadString(kConverterErrorStrings, kUseHotSyncManagerIndex);
+		break;
 	case kFieldNameTooLongError:
 		return LoadString(kConverterErrorStrings, kFieldNameTooLongIndex);
 		break;

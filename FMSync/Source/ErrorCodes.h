@@ -1,6 +1,7 @@
 #pragma once
 
 const ExceptionCode kNeedSys8Code = 'Sys8';
+const ExceptionCode kRunInHotSyncMangerCode = 'HotS';
 const ExceptionCode kNeedAppearanceCode = 'Appe';
 const ExceptionCode kSyncQuietAbortErr = 'QErr';
 const ExceptionCode kSyncUserCanceledErr = userCanceledErr;

@@ -37,6 +37,7 @@ public:
 	static bool				AskForFileMakerDatabase(FSSpec& outSpec, OSType& outType);
 	static bool				AskForFileMakerDatabasePlus(OSType extraType, FSSpec& outSpec, OSType& outType);
 	bool					FileMakerIsRunning();
+	bool					WaitUntilFileMakerIsRunning();
 	static bool 			CreatorIsFileMaker(OSType creator);
 
 	int						GetDatabaseCount();
