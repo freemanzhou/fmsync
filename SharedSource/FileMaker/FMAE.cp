@@ -108,10 +108,10 @@ FieldID::ExtractFromDescriptor(AEDesc* theDesc)
 		CAEDescriptor listItem;
 		ThrowIfOSErr_(AEGetNthDesc(theDesc, i, typeWildCard, &keyWord, listItem));
 		long itemListCount;
-		::AECountItems(listItem, &itemListCount);
+		OSStatus status = ::AECountItems(listItem, &itemListCount);
 		DescType typeCode;
 		long actualSize;
-		if (itemListCount > 1) {
+		if (status == noErr && itemListCount > 1) {
 			long field;
 			long relationship;
 			ThrowIfOSErr_(AEGetNthPtr(listItem, 1, typeLongInteger, &keyWord, &typeCode, &relationship, sizeof(relationship), &actualSize));
