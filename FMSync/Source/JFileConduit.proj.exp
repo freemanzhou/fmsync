@@ -1,0 +1,5 @@
+ConfigureConduit
+GetConduitVersion
+GetConduitName
+OpenConduit
+GetActionString

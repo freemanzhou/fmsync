@@ -1,0 +1,20 @@
+#if __POWERPC__
+	#pragma precompile_target "JFConduitHeadersPPC"
+	
+#elif __CFM68K__
+	#pragma precompile_target "JFConduitHeadersCFM68K"
+	
+#else
+	#pragma precompile_target "JFConduitHeaders68K"
+#endif
+
+#pragma once on
+#define CONDUIT 1
+#include <PP_ClassHeaders.cp>
+#include <vector>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <functional>
+using namespace std;
+#include "GladPortDefs.h"

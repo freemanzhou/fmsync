@@ -1,0 +1,29 @@
+#pragma once
+
+#define		kOtherStrings				8301
+#define		kSpecifyFieldNamesIndex		1
+#define		kSyncTasksIndex				2
+#define		kDatabaseOptionsIndex		3
+#define		kDeletedIndex				4
+#define		kSureToRemoveIndex			5
+#define		kUseDisableInsteadIndex		6
+#define		kProcessingFMTaskIndex		7
+#define		kNofNIndex					8
+#define		kLookingForConflictsIndex	9
+#define		kInitForJFileIndex			10
+#define		kInitForFMIndex				11
+#define		kExaminingRecordIndex		12
+#define		kCancelingIndex				13
+#define		kSureSynchronizeIndex		14
+#define		kUseSmallButtonsIndex		15
+#define		kFileMaker211Index			16
+#define		kFileMaker212Index			17
+#define		kTwoWayDescriptionIndex		18
+#define		kUploadOnlyIndex			19
+#define		kDownloadOnlyIndex			20
+#define		kProcessingPalmTaskIndex	21
+#define		kDataFileSavedIndex			22
+#define		kSavePromptIndex			23
+#define		kEveryHotSyncIndex			24
+#define		kNextHotSyncIndex			25
+#define		kNextAfterDateIndex			26

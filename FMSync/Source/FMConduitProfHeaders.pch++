@@ -1,0 +1,22 @@
+#if __POWERPC__
+	#pragma precompile_target "FMConduitProfHeadersPPC"
+	
+#elif __CFM68K__
+	#pragma precompile_target "FMConduitProfHeadersCFM68K"
+	
+#else
+	#pragma precompile_target "FMConduitProfHeaders68K"
+#endif
+
+#pragma once on
+#define HEAP_MANAGER 1
+#define CONDUIT 1
+#include <PP_ClassHeaders.cp>
+#include <fp.h>
+#include <vector>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <functional>
+using namespace std;
+#include "GladPortDefs.h"

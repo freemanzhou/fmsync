@@ -1,0 +1,25 @@
+#pragma precompile_target "FMConduitDebugHeadersCarbon"
+
+#pragma once on
+#define PP_Target_Carbon		1
+
+#define PP_Target_Classic		(!PP_Target_Carbon)
+
+#define TARGET_API_MAC_CARBON	PP_Target_Carbon
+#define TARGET_API_MAC_OS8		PP_Target_Classic
+
+#define _DEBUG 1
+#define HEAP_MANAGER 1
+#define CONDUIT 1
+#define SELF_TESTS 0
+#include <PP_DebugHeaders.cp>
+#include <fp.h>
+#include <vector>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <functional>
+using namespace std;
+//#define PALMBOOL BOOL
+#include "GladPortDefs.h"
+#include "SyncMgr.h"

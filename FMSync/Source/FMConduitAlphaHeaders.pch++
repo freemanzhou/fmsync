@@ -1,0 +1,27 @@
+#if __POWERPC__
+	#pragma precompile_target "FMConduitAlphaHeadersPPC"
+	
+#elif __CFM68K__
+	#pragma precompile_target "FMConduitAlphaHeadersCFM68K"
+	
+#else
+	#pragma precompile_target "FMConduitAlphaHeaders68K"
+#endif
+
+#pragma once on
+#define HEAP_MANAGER 1
+#define CONDUIT 1
+#define ALPHA 1
+#define NETWORK 1
+#include <PP_ClassHeaders.cp>
+#include <fp.h>
+#include <vector>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <functional>
+using namespace std;
+#define eModem ePalmModem
+#define PALMBOOL BOOL
+#include "GladPortDefs.h"
+#include "SyncMgr.h"
