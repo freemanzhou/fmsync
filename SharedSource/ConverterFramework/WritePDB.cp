@@ -5,6 +5,7 @@
 #include "CDatabase.h"
 #include "charset.h"
 #include "Utilities.h"
+#include "MemoryUtilities.h"
 #include "Stringiness.h"
 #include "Str255.h"
 

@@ -2,6 +2,7 @@
 
 #include "CAEDescriptor.h"
 #include "OpaqueInteger.h"
+#include "Utilities.h"
 
 #include <string>
 #include <vector>
@@ -16,8 +17,7 @@ template <class T> T convert(AEDesc*, int index);
 template <class T>
 void ExtractList(AEDesc* desc, std::vector<T>& list)
 {
-	long listCount;
-	::AECountItems(desc, &listCount);
+	long listCount = CountItems(desc);
 	list.reserve(listCount);
 	for (int i = 1; i <= listCount; i += 1) {
 		list.push_back(convert<T>(desc, i));

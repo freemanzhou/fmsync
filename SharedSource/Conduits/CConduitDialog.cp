@@ -187,6 +187,7 @@ CConduitDialog::RegisterClasses()
 		RegisterClassID_(LAMTextGroupBoxImp, LTextGroupBox::imp_class_ID);
 		RegisterClassID_(LAMControlImp, LTabsControl::imp_class_ID);
 		RegisterClassID_(LAMEditTextImp, LEditText::imp_class_ID);
+		RegisterClassID_(LAMControlImp,	LPlacard::imp_class_ID);
 	}
 }
 

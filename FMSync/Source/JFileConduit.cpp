@@ -82,16 +82,6 @@ Boolean gCanceling = false;
 
 static string kCanceling;
 
-static void BeepAndWait()
-{
-#if 0
-	SysBeep(0);
-	long theEnd = TickCount() + 60;
-	while (TickCount() < theEnd)
-		;
-#endif
-}
-
 class StResourceFile {
 public:
 		StResourceFile(short resFileRefNum);
@@ -149,16 +139,6 @@ CallConduitProgress(const char *progressString)
 			}
 		}
 		#endif
-		unsigned long stackFreeSpace;
-		ThreadCurrentStackSpace(kCurrentThreadID, &stackFreeSpace);
-		if (stackFreeSpace >= 4096) {
-			if (gProgressCallBack(progressBuffer) != 0) {
-				gCanceling = true;
-				if (gSafeCancel) {
-					Throw_(userCanceledErr);
-				}
-			}
-		}
 	}
 }
 
@@ -223,29 +203,21 @@ StResourceFile::~StResourceFile()
 
 long OpenConduit(PROGRESSFN inProgressCallBack, CSyncProperties& inSyncProperties)
 {
-	BeepAndWait();
-	unsigned long stackFreeSpace;
-	ThreadCurrentStackSpace(kCurrentThreadID, &stackFreeSpace);
-	if (stackFreeSpace < 10024)
-		return insufficientStackErr; 
 	return CJFileConduit::OpenConduit(inProgressCallBack, inSyncProperties);
 }
 
 long GetConduitName(char* ioConduitName, WORD inStrLen)
 {
-	BeepAndWait();
 	return CJFileConduit::GetConduitName(ioConduitName, inStrLen);
 }
 
 DWORD GetConduitVersion()
 {
-	BeepAndWait();
 	return CJFileConduit::GetConduitVersion();
 }
 
 long ConfigureConduit(CSyncPreference& inSyncProperties)
 {
-	BeepAndWait();
 	return CJFileConduit::ConfigureConduit(inSyncProperties);
 }
 #if PP_Target_Classic
@@ -546,7 +518,6 @@ Boolean CJFileConduit::IsThisKeyDown(const short theKey)
 
 pascal OSErr ConduitInit(const CFragInitBlock* theInitBlock)
 {
-	BeepAndWait();
 	OSErr err = noErr;
 
 	__initialize(theInitBlock);
@@ -562,17 +533,11 @@ pascal OSErr ConduitInit(const CFragInitBlock* theInitBlock)
 		memcpy(gFragName, theInitBlock->fragLocator.u.onDisk.fileSpec->name,
 						  theInitBlock->fragLocator.u.onDisk.fileSpec->name[0] + 1);
 
-
-	if (err == noErr) {
-		BeepAndWait();
-	}
 	return err;
 }
 
 pascal void ConduitExit(void)
 {
-	BeepAndWait();
-
 	if (gRsrcFileRefNum != -1) {
 		CloseResFile(gRsrcFileRefNum);
 		gRsrcFileRefNum = -1;

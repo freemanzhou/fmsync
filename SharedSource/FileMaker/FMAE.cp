@@ -2,6 +2,7 @@
 #include "CAEDescriptor.h"
 #include "BinaryFormat.h"
 #include "DebugOutput.h"
+#include "Utilities.h"
 
 namespace {
 
@@ -101,17 +102,15 @@ FieldID::ExtractFromDescriptor(AEDesc* theDesc)
 {
 	vector<FieldID> list;
 
-	long listCount;
-	::AECountItems(theDesc, &listCount);
+	long listCount = CountItems(*theDesc);
 	for (int i = 1; i <= listCount; i += 1) {
 		AEKeyword keyWord;
 		CAEDescriptor listItem;
 		ThrowIfOSErr_(AEGetNthDesc(theDesc, i, typeWildCard, &keyWord, listItem));
-		long itemListCount;
-		OSStatus status = ::AECountItems(listItem, &itemListCount);
+		long itemListCount = listItem.Count();
 		DescType typeCode;
 		long actualSize;
-		if (status == noErr && itemListCount > 1) {
+		if (itemListCount > 1) {
 			long field;
 			long relationship;
 			ThrowIfOSErr_(AEGetNthPtr(listItem, 1, typeLongInteger, &keyWord, &typeCode, &relationship, sizeof(relationship), &actualSize));

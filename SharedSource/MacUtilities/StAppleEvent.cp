@@ -137,8 +137,7 @@ StAppleEvent::DumpDescriptor(AEKeyword keyword, const AEDesc* descriptor)
 	theString += keyWordString;
 	theString += '\r';
 	DebugOutput::Output(theString);
-	long theCount;
-	AECountItems(descriptor, &theCount);
+	long theCount = CountItems(descriptor);
 	if (theCount > 0)
 		DebugOutput::Output("-->contains");
 	for (long index = 1; index <= theCount; index += 1) {

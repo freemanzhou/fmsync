@@ -5,13 +5,6 @@
 
 #include "OpaqueInteger.h"
 
-void ClearBlock(void *p, int length);
-
-template <class T> inline void Clear(T &foo)
-{
-	ClearBlock(&foo, sizeof(foo));
-}
-
 #include <PP_Prefix.h>
 #include <LFile.h>
 #include <UGWorld.h>
@@ -35,14 +28,6 @@ inline void (ByteClamp) (T& x)
 	if (x > 255) x = 255;
 }
 
-template <class T>
-inline void ForgetObject(T* & x)
-{
-	T *temp = x;
-	x = 0;
-	delete temp;
-}
-
 void AppendToPopupButton(LPopupButton *button, bool addSeparator, const std::vector<std::string>& namesToAppend);
 void Normalize(const FSSpec& inFileSpec, FSSpec* outSpec);
 bool FileExists(const FSSpec& inFileSpec);
@@ -55,6 +40,8 @@ void UnlockGWorldPixels(LGWorld* world);
 int GWorldRowBytes(LGWorld* world);
 OSErr ResolveAlias(AliasHandle aliasH, FSSpec& outFileSpec);
 bool AliasHandlesEquivalent(AliasHandle a, AliasHandle b);
+int CountItems(const AEDescList &);
+inline int CountItems(const AEDescList *theList) {return CountItems(*theList);}
 
 std::string GetText(LTextEditView* view);
 

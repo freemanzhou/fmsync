@@ -3,6 +3,7 @@
 #include "Descriptors.h"
 #include "MemoryUtilities.h"
 #include "Stringiness.h"
+#include "Utilities.h"
 
 #include <algorithm>
 
@@ -282,9 +283,7 @@ int CAEDescriptor::Count() const
 	if (mDesc.descriptorType != typeAEList)
 		return 0;
 		
-	long theCount;
-	ThrowIfOSErr_(AECountItems(&mDesc, &theCount));
-	return theCount;
+	return CountItems(&mDesc);
 }
 
 // ---------------------------------------------------------------------------

@@ -18,6 +18,7 @@
 #include "CUniqueNamer.h"
 #include "ErrorStrings.h"
 #include "ErrorCodes.h"
+#include "MemoryUtilities.h"
 #include "Utilities.h"
 #include "StAppleEvent.h"
 #include "Stringiness.h"

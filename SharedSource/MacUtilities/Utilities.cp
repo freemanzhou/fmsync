@@ -25,16 +25,6 @@ AppendToPopupButton(LPopupButton *button, bool addSeparator, const vector<string
 	}
 }
 
-void
-ClearBlock(void *p, int length)
-{
-	char *ptr = (char *)p;
-	char *limitPtr = ptr + length;
-	
-	while (ptr < limitPtr)
-		*ptr++ = 0;
-}
-
 void GetPreferencesFolder(FSSpec& spec)
 {
 	ThrowIfOSErr_(::FindFolder(kOnSystemDisk, kPreferencesFolderType, true, 
@@ -258,17 +248,6 @@ int cmp_nocase(const string &s, const string& s2)
 const int kMinFreeStackSpace = 4096;
 void ConfirmFreeStackSpace()
 {
-#ifdef CONDUIT
-	unsigned long stackFreeSpace;
-	ThreadCurrentStackSpace(kCurrentThreadID, &stackFreeSpace);
-	if (stackFreeSpace < kMinFreeStackSpace)
-		Throw_(insufficientStackErr); 
-#if LOG_STACK_SPACE
-		DebugOutput::Output( "free stack space = " );
-		DebugOutput::Output( AsString((int)stackFreeSpace).c_str());
-		DebugOutput::Output( "\r" );
-#endif
-#endif
 }
 
 string
@@ -297,6 +276,15 @@ AliasHandlesEquivalent(AliasHandle a, AliasHandle b)
 	ResolveAlias(a, specB);
 	
 	return LFile::EqualFileSpec(specA, specB);
+}
+
+int CountItems(const AEDescList &theDescList)
+{
+	long theCount = 0;
+	OSStatus status = AECountItems(&theDescList, &theCount);
+	if (status != noErr)
+		return 0;
+	return theCount;
 }
 
 short GetBootDisk()

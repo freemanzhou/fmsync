@@ -260,14 +260,16 @@ Database::HasAEListItems(CAEDescriptor& theDesc)
 {
 	vector<int> listInts;
 
-	long listCount;
-	::AECountItems(theDesc, &listCount);
+	long listCount = 0;
+	OSStatus status = ::AECountItems(theDesc, &listCount);
+	if (status != noErr)
+		return false;
+		
 	for (int i = 1; i <= listCount; i += 1) {
 		AEKeyword keyWord;
 		CAEDescriptor listItem;
 		ThrowIfOSErr_(AEGetNthDesc(theDesc, i, typeWildCard, &keyWord, listItem));
-		long itemListCount;
-		::AECountItems(listItem, &itemListCount);
+		long itemListCount = listItem.Count();
 		if (itemListCount > 1)
 			return true;
 	}
@@ -553,8 +555,7 @@ static void
 ListToString(CAEDescriptor& field, string& outString)
 {
 	AEKeyword keyWord;
-	long fieldCount;
-	::AECountItems(field, &fieldCount);
+	long fieldCount = field.Count();
 	int fieldIndex;
 	for (fieldIndex = 1; fieldIndex <= fieldCount; fieldIndex += 1) {
 		DescType typeCode;
@@ -626,8 +627,7 @@ Database::GetRecord(int recordID, const AEDesc *layout, const vector<FieldID>& f
 	CAEDescriptor record;
 	ThrowIfOSErr_(::AEGetParamDesc(theReply, keyDirectObject, typeAEList, record));
 	AEKeyword keyWord;
-	long fieldCount;
-	::AECountItems(record, &fieldCount);
+	long fieldCount = record.Count();
 	int fieldIndex;
 	fields.reserve(fieldCount);
 	for (fieldIndex = 1; fieldIndex <= fieldCount; fieldIndex += 1) {
@@ -689,8 +689,7 @@ Database::GetFields()
 				AEKeyword keyWord;
 				ThrowIfOSErr_(::AEGetNthDesc(result, i, typeAEList, &keyWord, record));
 			}
-			long fieldCount;
-			::AECountItems(record, &fieldCount);
+			long fieldCount = record.Count();
 			int fieldIndex;
 			fields.reserve(fieldCount);
 			for (fieldIndex = 1; fieldIndex <= fieldCount; fieldIndex += 1) {
