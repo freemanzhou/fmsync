@@ -166,9 +166,14 @@ CDataTask::~CDataTask()
 void
 CDataTask::InitializeFieldSelector(bool localWins)
 {
-	if (fLocal.fDataState == CDataHolder::kDeleted || fRemote.fDataState == CDataHolder::kDeleted) {
+	if (fLocal.fDataState == CDataHolder::kDeleted) {
 		fIsDeleteConflict = true;
 		fDeleteTakeLocal = localWins;
+		fMerged = fRemote;
+	} else if (fRemote.fDataState == CDataHolder::kDeleted) {
+		fIsDeleteConflict = true;
+		fDeleteTakeLocal = localWins;
+		fMerged = fLocal;
 	} else {
 		fIsDeleteConflict = false;
 		if (localWins)

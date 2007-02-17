@@ -50,16 +50,40 @@ const UInt16 FLDOPT_CLEAR			=0x00ff;
 
 
 
-#define 	MAX_FIELDS						50		// maximum of 50 fields per record in the database
-#define 	MAX_FIELD_NAME_LENGTH			20 		// field names limited to 20 characters
-#define		MAX_DATA_LENGTH					4000	// each field can have up to 4000 characters in it
-													// although the record will be limited by a variable amount
-													// depending on PalmOS version number.
-#define		MAX_FIND_STRING					16		// find strings limited to 16 characters
-#define		MAX_TOTAL_POPUP_PER_LIST_LENGTH	2500	// maximum of 2500 characters used in total per popup list
-#define		MAX_POPUP_ITEMS					100		// maximum of 100 popup items per popup list
-#define		MAX_POPUP_ITEM_LENGTH			25		// popup items limited to 25 character string as max
+// Maximum of 50 fields per data
+#define 	MAX_FIELDS						50		
+
+// Maximum of 20 characters per field name
+#define 	MAX_FIELD_NAME_LENGTH			20 		
+
+// Maxiimum of 10000 characters per field
+#define		MAX_DATA_LENGTH					10000	
+
+// Maximum length of strings for the 'find' or 'filter' operation is 
+// 15 character
+#define		MAX_FIND_STRING					16
+
+// Maximum of 2500 characters per popup list
+#define		MAX_TOTAL_POPUP_PER_LIST_LENGTH	5000	
+
+// Maximum of 100 items in each popup list
+#define		MAX_POPUP_ITEMS					200		
+
+// Maximum of 25 characters per item in a popup list
+#define		MAX_POPUP_ITEM_LENGTH			25		
+
+// Database names for JFile limited to 30 characters
 #define 	MAX_DB_NAME_LENGTH 				30
+ 
+// Default values for fields (new to JFile 5.x) are limited to 80 chars
+#define 	MAX_DEFAULTVAL_LENGTH			80		
+
+// Maximum 'filter name' is limited to 16 characters
+#define		MAX_FILTERNAME_LENGTH			16
+#define		MAX_SORTNAME_LENGTH				16
+
+// The Short Text string sub type is limited to this many characters
+#define		MAX_SHORT_TEXT_CHARS			250
  
 
 

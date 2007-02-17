@@ -283,71 +283,38 @@ namespace JFile5
 
 
 // Maximum of 50 fields per data
-
 #define 	MAX_FIELDS						50		
 
-
-
 // Maximum of 20 characters per field name
-
 #define 	MAX_FIELD_NAME_LENGTH			20 		
 
-
-
-// Maxiimum of 4000 characters per record
-
-#define		MAX_DATA_LENGTH					4000	
-
-
+// Maxiimum of 10000 characters per field
+#define		MAX_DATA_LENGTH					10000	
 
 // Maximum length of strings for the 'find' or 'filter' operation is 
-
 // 15 character
-
 #define		MAX_FIND_STRING					16
 
-
-
 // Maximum of 2500 characters per popup list
-
-#define		MAX_TOTAL_POPUP_PER_LIST_LENGTH	2500	
-
-
+#define		MAX_TOTAL_POPUP_PER_LIST_LENGTH	5000	
 
 // Maximum of 100 items in each popup list
-
-#define		MAX_POPUP_ITEMS					100		
-
-
+#define		MAX_POPUP_ITEMS					200		
 
 // Maximum of 25 characters per item in a popup list
-
 #define		MAX_POPUP_ITEM_LENGTH			25		
 
-
-
 // Database names for JFile limited to 30 characters
-
 #define 	MAX_DB_NAME_LENGTH 				30
-
  
-
 // Default values for fields (new to JFile 5.x) are limited to 80 chars
-
 #define 	MAX_DEFAULTVAL_LENGTH			80		
 
-
-
 // Maximum 'filter name' is limited to 16 characters
-
 #define		MAX_FILTERNAME_LENGTH			16
-
 #define		MAX_SORTNAME_LENGTH				16
 
-
-
 // The Short Text string sub type is limited to this many characters
-
 #define		MAX_SHORT_TEXT_CHARS			250
 
 

@@ -40,7 +40,7 @@ StRecordLocker::~StRecordLocker()
 }
 
 
-const int kMaxFieldDataSize = 8192;
+const int kMaxFieldDataSize = 32*1024;
 static char fieldDataBuffer[kMaxFieldDataSize];
 
 const unsigned long kChoicesProperty = 'pCHS';
